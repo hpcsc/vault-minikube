@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: vault-minikube
+resources:
+- deployment.yaml
+- service.yaml
+- vault-auth-sa.yaml
+- job.yaml
+- namespace.yaml
+
+configMapGenerator:
+- name: vault-init-config
+  files:
+  - ./configmap-files/policy.hcl
+  - ./configmap-files/vault-init.sh

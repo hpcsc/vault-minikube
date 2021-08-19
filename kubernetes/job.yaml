@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vault-init
+spec:
+  template:
+    spec:
+      serviceAccountName: vault-auth
+      containers:
+      - name: vault-init
+        image: vault
+        command: ["/vault-init-config/vault-init.sh"]
+        volumeMounts:
+        - name: vault-init-config
+          mountPath: /vault-init-config
+        env:
+          - name: VAULT_ADDR
+            value: http://vault:8200
+          - name: VAULT_TOKEN
+            value: root
+      restartPolicy: Never
+      volumes:
+      - name: vault-init-config
+        configMap:
+          defaultMode: 0755
+          name: vault-init-config
