@@ -46,4 +46,5 @@ vault write auth/kubernetes/minikube/role/read-only \
     policies=read-only \
     ttl=1h
 
-vault kv put secret/test-secret key=value
+vault kv put secret/read-only/test-secret key=value
+vault kv put secret/another-test-secret key=value
