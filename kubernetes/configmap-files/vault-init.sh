@@ -39,12 +39,14 @@ if [ -z "$(vault auth list | grep kubernetes)" ]; then
       kubernetes_host=https://kubernetes.default \
       kubernetes_ca_cert="${SA_CA_CRT}"
 fi
-vault policy write read-only /vault-init-config//policy.hcl
+vault policy write read-only /vault-init-config/policy.hcl
 vault write auth/kubernetes/minikube/role/read-only \
     bound_service_account_names=default \
     bound_service_account_namespaces=* \
     policies=read-only \
     ttl=1h
 
-vault kv put secret/read-only/test-secret key=value
+vault kv put secret/read-only/test-secret key1=value1 key2=vaue2
 vault kv put secret/another-test-secret key=value
+
+vault secrets enable aws
