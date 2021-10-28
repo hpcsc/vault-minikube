@@ -9,3 +9,7 @@ variable "description" {
 variable "audiences" {
   type = list(string)
 }
+
+variable "group_name" {
+  type = string
+}

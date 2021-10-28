@@ -8,5 +8,6 @@ spec:
     - name: vault
       port: 8200
       targetPort: 8200
+      nodePort: 30123
   selector:
     app: vault

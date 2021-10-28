@@ -11,8 +11,8 @@ resource "okta_auth_server_claim" "default" {
   name                    = "groups"
   always_include_in_token = true
   value_type              = "GROUPS"
-  group_filter_type       = "STARTS_WITH"
-  value                   = "vault_"
+  group_filter_type       = "EQUALS"
+  value                   = var.group_name
   scopes                  = ["profile"]
   claim_type              = "IDENTITY"
 }
@@ -33,6 +33,6 @@ resource "okta_auth_server_policy_rule" "default" {
   name                 = "default"
   priority             = 1
   group_whitelist      = ["EVERYONE"]
-  grant_type_whitelist = ["authorization_code", "implicit"]
+  grant_type_whitelist = ["authorization_code"]
   scope_whitelist      = ["*"]
 }

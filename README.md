@@ -30,3 +30,14 @@ vault write aws/roles/my-role \
     role_arns=arn:aws:iam::my-account:role/my-role \
     credential_type=assumed_role
 ```
+
+## Configure Okta auth backend
+
+```shell
+# deploy vault to kubernetes
+make apply
+# use terraform to create okta authorization server, okta application for vault and setup okta auth backend in vault
+cd infra && make apply
+# Go to okta, assign users to okta group created by terraform (`vault-minikube` by default)
+# Go to vault, login using oidc role `read-only`
+```
