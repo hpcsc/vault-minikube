@@ -16,6 +16,16 @@ make get-secret SECRET=secret/read-only/test-secret         # accessible
 make get-secret SECRET=secret/another-test-secret         # inaccessible
 ```
 
+### Render vault template
+
+These make targets get service account `default` token, use that token to authenticate with vault k8s to get vault token and use that vault token to render different templates
+
+```shell
+make render-secret-templates    # this renders template for secrets from K-V engine
+make render-aws-templates       # this renders template for aws temporary credentials
+make render-pki-templates       # this renders template for pki certificate/private key
+```
+
 ## Configure AWS secret engine
 
 ```shell

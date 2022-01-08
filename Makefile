@@ -28,3 +28,9 @@ render-aws-template:
 	rm -rf ./tmp && mkdir -p ./tmp
 	./scripts/get-sa-token.sh > ./tmp/token
 	vault agent -address=http://$(shell minikube ip):${VAULT_PORT} -config=templates/aws.hcl
+
+render-pki-template:
+	$(eval VAULT_PORT=$(shell kubectl get svc vault --context minikube -n vault-minikube -o json | jq -r '.spec.ports[0].nodePort'))
+	rm -rf ./tmp && mkdir -p ./tmp
+	./scripts/get-sa-token.sh > ./tmp/token
+	vault agent -address=http://$(shell minikube ip):${VAULT_PORT} -config=templates/pki.hcl

@@ -13,3 +13,7 @@ path "secret/metadata/" {
 path "aws/sts/*" {
     capabilities = ["read", "list"]
 }
+
+path "pki/issue/*" {
+    capabilities = ["update"]
+}
